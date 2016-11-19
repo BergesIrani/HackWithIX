@@ -48,13 +48,13 @@ var OptimizeFloor = $(function(){
       oldFloor = currFloor;
       currFloor = new State (maxBid, avgBid, (maxBid - floor),
                             (avgBid - floor), null);
-      optimizeFloor();
+      this. optimizeFloor();
 
       return currFloor;
     }
 
     // Returns the current state variable as State Object
-    function getCurrentState() {
+    this.getCurrentState = function () {
       return currFloor;
     }
 
