@@ -1,3 +1,8 @@
+#
+# Author: Neel Mehta
+# Date: 19 November 2016
+#
+
 import json
 from numpy.random import lognormal
 
@@ -15,6 +20,9 @@ with open('data.json') as data_file:
     sample_json = {"video": [], "banner": []}
     app, desktop, mobile = sample_json, sample_json, sample_json
 
+    # Variable to calculate the mean of the averages and high_bid
+    agg_avg, agg_high = 0, 0
+
     # Iterating over the ad data
     for i in range(len(na_ad_data)):
         obj = na_ad_data[i]
@@ -28,6 +36,9 @@ with open('data.json') as data_file:
         scale = (1 - (s / 85))
 
         new_object["avg_bid"] = scale * new_object["high_bid"]
+
+        agg_avg += new_object["avg_bid"]
+        agg_high += new_object["high_bid"]
 
         # Filtering the data and adding it to the appropriate list
         if obj["format"] == "video":
@@ -53,4 +64,12 @@ with open('data.json') as data_file:
     with open('parsed.json', 'w') as outfile:
         json.dump(final_json, outfile)
 
-    print json.dumps(final_json, indent=4, sort_keys=True)
+    agg_avg /= len(na_ad_data)
+    agg_high /= len(na_ad_data)
+
+    mean_json = {}
+    mean_json["avg_mean"] = agg_avg
+    mean_json["high_mean"] = agg_high
+
+    with open('avg_stats.json', 'w') as outfile:
+        json.dump(mean_json, outfile)

@@ -33,9 +33,11 @@ var OptimizeFloor = $(function(){
     // Computes current floor based on old floor
     this.optimizeFloor = function () {
       var newFloor = 0;
-      if (currFloor.delt >= 0) {
+      if (currFloor.avg_delta > 0) {
         newFloor = currFloor.floor + currFloor.delta *
                    (Math.pow(LAMBDA, (GAMMA / currFloor.avg_delta));
+      } else if (currFloor.avg_delta == 0) {
+        newFloor = currFloor.floor + currFloor.delta * LAMBDA;
       } else {
         newFloor = currFloor.floor + currFloor.avg_delta *
                    (Math.pow(LAMBDA, (GAMMA / currFloor.delta));
@@ -48,7 +50,7 @@ var OptimizeFloor = $(function(){
       oldFloor = currFloor;
       currFloor = new State (maxBid, avgBid, (maxBid - floor),
                             (avgBid - floor), null);
-      this. optimizeFloor();
+      this.optimizeFloor();
 
       return currFloor;
     }
