@@ -1,16 +1,16 @@
 ###parsed.json file structure###
 
 Individual JSON structure
-'''
+```
 {
   "avg_bid" : FLOAT,
   "high_bid" : FLOAT,
   "timestamp" : LONG
 }
-'''
+```
 
 Overall file structure
-'''
+```
 {
   "app" : {
     "banner" : [...],
@@ -25,6 +25,6 @@ Overall file structure
     "video" : [...]
   }
 }
-'''
+```
 
-This file contains arrays of all the JSON objects. 
+This file contains arrays of all the JSON objects.
