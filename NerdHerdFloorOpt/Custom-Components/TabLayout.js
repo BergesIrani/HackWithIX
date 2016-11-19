@@ -1,5 +1,7 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import baseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 const styles = {
   headline: {
@@ -11,6 +13,10 @@ const styles = {
 };
 
 export default class TabLayout extends React.Component {
+
+  getChildContext() {
+    return { muiTheme: getMuiTheme(baseTheme) };
+  }
 
   constructor(props) {
     super(props);
@@ -65,3 +71,7 @@ export default class TabLayout extends React.Component {
     );
   }
 }
+
+ TabLayout.childContextTypes = {
+   muiTheme: React.PropTypes.object.isRequired,
+};

@@ -1,33 +1,22 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
+import AppBarExt from './Custom-Components/CustAppBar';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import TabLayout from './Custom-Components/TabLayout'
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 class App extends React.Component {
    render() {
       return (
          <div>
-           <TabLayout />
+          <AppBarExt />
+          <TabLayout />
          </div>
       );
    }
 }
-
-const AppBarExampleIcon = () => (
-  <AppBar
-    title="Title"
-    iconClassNameRight=""
-    iconClassNameLeft=""
-  />
-);
-
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
-};
 
 export default App;
