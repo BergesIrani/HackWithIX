@@ -4,7 +4,7 @@
 */
 
 // Requires JQuery
-$(function(){
+var OptimizeFloor = $(function(){
 
   // Constants
   var LAMBDA = 0.01;  // Learning rate base constant
@@ -23,38 +23,40 @@ $(function(){
     this.floor = floor;
   }
 
+  // Returns the constructor
   // Setting initial values for data
-  function init(baseFloor, _LAMBDA, _GAMMA) {
+  return function OptimizeFloorConstructor(baseFloor, _LAMBDA, _GAMMA) {
     currFloor = new State(null, null, null, null, baseFloor);
     LAMBDA = _LAMBDA;
     GAMMA = _GAMMA;
-  }
 
-  // Computes current floor based on old floor
-  function optimizeFloor() {
-    var newFloor = 0;
-    if (currFloor.delt >= 0) {
-      newFloor = currFloor.floor + currFloor.delta *
-                 (Math.pow(LAMBDA, (GAMMA / currFloor.avg_delta));
-    } else {
-      newFloor = currFloor.floor + currFloor.avg_delta *
-                 (Math.pow(LAMBDA, (GAMMA / currFloor.delta));
+    // Computes current floor based on old floor
+    this.optimizeFloor = function () {
+      var newFloor = 0;
+      if (currFloor.delt >= 0) {
+        newFloor = currFloor.floor + currFloor.delta *
+                   (Math.pow(LAMBDA, (GAMMA / currFloor.avg_delta));
+      } else {
+        newFloor = currFloor.floor + currFloor.avg_delta *
+                   (Math.pow(LAMBDA, (GAMMA / currFloor.delta));
+      }
+      currFloor.floor = newFloor;
     }
-    currFloor.floor = newFloor;
-  }
 
-  // Updates current state
-  function updateState(maxBid, avgBid) {
-    oldFloor = currFloor;
-    currFloor = new State (maxBid, avgBid, (maxBid - floor),
-                          (avgBid - floor), null);
-    optimizeFloor();
+    // Updates current state
+    this.updateState = function (maxBid, avgBid) {
+      oldFloor = currFloor;
+      currFloor = new State (maxBid, avgBid, (maxBid - floor),
+                            (avgBid - floor), null);
+      optimizeFloor();
 
-    return currFloor;
-  }
+      return currFloor;
+    }
 
-  // Returns the current state variable as State Object
-  function getCurrentState() {
-    return currFloor;
+    // Returns the current state variable as State Object
+    function getCurrentState() {
+      return currFloor;
+    }
+
   }
 });
