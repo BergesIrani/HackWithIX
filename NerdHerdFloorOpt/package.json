@@ -1,0 +1,17 @@
+{
+  "name": "NerdHerdFloorOpt",
+  "version": "0.1.0",
+  "description": "Optimizes the floor bidding value during ad space auctions.",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --hot"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
+  }
+}
