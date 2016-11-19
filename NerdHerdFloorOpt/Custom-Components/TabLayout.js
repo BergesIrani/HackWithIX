@@ -19,7 +19,7 @@ export default class TabLayout extends React.Component {
     };
   }
 
-  handleChange = (value) => {
+  handleChange(value) {
     this.setState({
       value: value,
     });
