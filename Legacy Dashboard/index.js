@@ -15,6 +15,8 @@ $(function(){
   var v_static_floor = null;
   var b_static_floor = null;
 
+  var max_length = 110;
+
   var v_data = null;
   var b_data = null; // Stores the data to be fed once initialised
   var countdown = null;
@@ -25,9 +27,11 @@ $(function(){
   var v_data_high = [];
   var v_data_avg = [];
   var v_data_floor = [];
+  var v_data_revenue = [];
   var b_data_high = [];
   var b_data_avg = [];
   var b_data_floor = [];
+  var b_data_revenue = [];
   var count = 0; // Stores the number of times called
 
   function init(platform) {
@@ -47,8 +51,8 @@ $(function(){
             b_optimize.init(stat_data["banner_avg_mean"], 0.2, 5);
 
             v_static_floor = stat_data.video_avg_mean;
-            b_static_floor = stat_data.banner_avg_mean
-            countdown = setInterval(addDataPoint, 1);
+            b_static_floor = stat_data.banner_avg_mean;
+            countdown = setInterval(addDataPoint, 500);
 
             function addDataPoint() {
               // Doing stuff for video
@@ -59,21 +63,32 @@ $(function(){
               v_static_revenue += calculateRevenue(v_static_floor, high, avg);
               v_dynamic_revenue += calculateRevenue(v_optimize.getCurrentState().floor, high, avg);
 
-              console.log((v_dynamic_revenue - v_static_revenue) / v_static_revenue)
+              document.getElementById("v_static_money").innerHTML = "Revenue with static floor: $" + v_static_revenue.toFixed(2);
+              document.getElementById("v_dynamic_money").innerHTML = "Revenue with dynamic floor: $" + v_dynamic_revenue.toFixed(2);
+              document.getElementById("v_diff_text").innerHTML = "Extra money made: $" + (v_dynamic_revenue - v_static_revenue).toFixed(2)
+              + " (" + (((v_dynamic_revenue - v_static_revenue) / v_static_revenue) * 100).toFixed(2) + "%)";
 
               v_data_high.push(high);
               v_data_avg.push(avg);
               v_data_floor.push(v_optimize.getCurrentState().floor);
+              v_data_revenue.push(v_dynamic_revenue - v_static_revenue);
+
+              if (v_data_high.length > max_length) {
+                v_data_high = v_data_high.slice(1);
+                v_data_avg = v_data_avg.slice(1);
+                v_data_floor = v_data_floor.slice(1);
+                v_data_revenue = v_data_revenue.slice(1);
+              }
 
               var high_plot = [];
               var avg_plot = [];
               var dynamic_floor_plot = [];
-              var static_floor_plot = [];
+              var revenue_plot = [];
               for (var i = 0; i < v_data_high.length; i++) {
                 high_plot.push([i, v_data_high[i]]);
                 avg_plot.push([i, v_data_avg[i]]);
                 dynamic_floor_plot.push([i, v_data_floor[i]]);
-                static_floor_plot.push([i, v_static_floor]);
+                revenue_plot.push([i, v_data_revenue[i]]);
               }
 
               var high_plot_series = { color : "#f00",
@@ -82,10 +97,11 @@ $(function(){
                                        data  : avg_plot };
               var dynamic_floor_plot_series = { color : "#00f",
                                       data  : dynamic_floor_plot };
-              var static_floor_plot = { color : "#000",
-                                        data  : static_floor_plot };
+              var revenue_plot_series = { color : "#000",
+                                          data  : revenue_plot };
 
-              var plot = $.plot("#video_bidding_chart", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
+              var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
+              plot = $.plot("#video_revenue", [revenue_plot_series], {});
 
               v_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
@@ -97,19 +113,34 @@ $(function(){
               b_static_revenue += calculateRevenue(b_static_floor, high, avg);
               b_dynamic_revenue += calculateRevenue(b_optimize.getCurrentState().floor, high, avg);
 
+              document.getElementById("b_static_money").innerHTML = "Revenue with static floor: $" + b_static_revenue.toFixed(2);
+              document.getElementById("b_dynamic_money").innerHTML = "Revenue with dynamic floor: $" + b_dynamic_revenue.toFixed(2);
+              document.getElementById("b_diff_text").innerHTML = "Extra money made: $" + (b_dynamic_revenue - b_static_revenue).toFixed(2)
+              + " (" + (((b_dynamic_revenue - b_static_revenue) / b_static_revenue) * 100).toFixed(2) + "%)";
+
               b_data_high.push(high);
               b_data_avg.push(avg);
               b_data_floor.push(b_optimize.getCurrentState().floor);
+              b_data_revenue.push(b_dynamic_revenue - b_static_revenue);
+
+              if (b_data_high.length > max_length) {
+                b_data_high = b_data_high.slice(1);
+                b_data_avg = b_data_avg.slice(1);
+                b_data_floor = b_data_floor.slice(1);
+                b_data_revenue = b_data_revenue.slice(1);
+              }
+
+console.log((b_dynamic_revenue - b_static_revenue) / b_static_revenue);
 
               high_plot = [];
               avg_plot = [];
               dynamic_floor_plot = [];
-              static_floor_plot = [];
+              revenue_plot = [];
               for (var i = 0; i < b_data_high.length; i++) {
                 high_plot.push([i, b_data_high[i]]);
                 avg_plot.push([i, b_data_avg[i]]);
                 dynamic_floor_plot.push([i, b_data_floor[i]]);
-                static_floor_plot.push([i, b_static_floor]);
+                revenue_plot.push([i, b_data_revenue[i]]);
               }
 
               high_plot_series = { color : "#f00",
@@ -118,8 +149,11 @@ $(function(){
                                   data  : avg_plot };
               dynamic_floor_plot_series = { color : "#00f",
                                             data  : dynamic_floor_plot };
+              revenue_plot_series = { color : "#000",
+                                      data  : revenue_plot };
 
-              var plot = $.plot("#banner_bidding_chart", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
+              plot = $.plot("#banner_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
+              plot = $.plot("#banner_revenue", [revenue_plot_series], {});
 
               b_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
@@ -144,17 +178,5 @@ $(function(){
     });
   }
 
-  $('#tab1').onClick(function (e) {
-    
-  });
-
-  $('#tab2').onClick(function (e) {
-
-  });
-
-  $('#tab3').onClick(function (e) {
-
-  });
-
-  init("app", "video");
+  init("desktop", "video");
 });
