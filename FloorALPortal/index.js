@@ -30,7 +30,7 @@ $(function(){
               optimize = OptimizeFloor();
               optimize.init(stat_data["avg_mean"], 0.005, 2)
               static_floor = stat_data.avg_mean;
-              countdown = setInterval(addDataPoint, 1);
+              countdown = setInterval(addDataPoint, 1000);
 
             function addDataPoint() {
               curr_data_point = data[count];
@@ -44,12 +44,7 @@ $(function(){
 
               optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
-              // insertData(curr_data_point);
               count += 1;
-
-              if (count == 100) {
-                cancelTimer();
-              }
             }
 
             function calculateRevenue(floor, high_bid, avg_bid) {
