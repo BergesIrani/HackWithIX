@@ -1,0 +1,17 @@
+Optimal experimented parameters for Lambda and Gamma
+
+Lambda: 0.005 Gamma: 0.5
+Lambda: 0.005 Gamma: 1
+Lambda: 0.005 Gamma: 1.5
+Lambda: 0.005 Gamma: 2
+Lambda: 0.01 Gamma: 0.5
+Lambda: 0.01 Gamma: 1
+Lambda: 0.01 Gamma: 1.5
+Lambda: 0.01 Gamma: 2
+Lambda: 0.015 Gamma: 0.5
+Lambda: 0.015 Gamma: 1
+Lambda: 0.015 Gamma: 1.5
+Lambda: 0.015 Gamma: 2
+Lambda: 0.02 Gamma: 0.5
+Lambda: 0.02 Gamma: 1
+Lambda: 0.02 Gamma: 1.5
