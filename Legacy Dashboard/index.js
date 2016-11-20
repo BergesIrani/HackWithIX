@@ -223,6 +223,7 @@ $(function(){
     b_data_avg = [];
     b_data_floor = [];
     b_data_revenue = [];
+    count = 0;
     clearTimeout(countdown)
   }
 
