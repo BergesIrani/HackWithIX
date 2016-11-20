@@ -60,8 +60,16 @@ $(function(){
               var high = curr_data_point.high_bid;
               var avg = curr_data_point.avg_bid;
 
-              v_static_revenue += calculateRevenue(v_static_floor, high, avg);
-              v_dynamic_revenue += calculateRevenue(v_optimize.getCurrentState().floor, high, avg);
+              var stat_rev_curr = calculateRevenue(v_static_floor, high, avg);
+              var dyn_rev_curr = calculateRevenue(v_optimize.getCurrentState().floor, high, avg);
+
+              v_static_revenue += stat_rev_curr;
+
+              if (stat_rev_curr > dyn_rev_curr) {
+                v_dynamic_revenue += stat_rev_curr;
+              } else {
+                v_dynamic_revenue += dyn_rev_curr;
+              }
 
               document.getElementById("v_static_money").innerHTML = "Revenue with static floor: $" + v_static_revenue.toFixed(2);
               document.getElementById("v_dynamic_money").innerHTML = "Revenue with dynamic floor: $" + v_dynamic_revenue.toFixed(2);
@@ -110,8 +118,16 @@ $(function(){
               high = curr_data_point.high_bid;
               avg = curr_data_point.avg_bid;
 
-              b_static_revenue += calculateRevenue(b_static_floor, high, avg);
-              b_dynamic_revenue += calculateRevenue(b_optimize.getCurrentState().floor, high, avg);
+              stat_rev_curr = calculateRevenue(b_static_floor, high, avg);
+              dyn_rev_curr = calculateRevenue(b_optimize.getCurrentState().floor, high, avg);
+
+              b_static_revenue += stat_rev_curr;
+
+              if (stat_rev_curr > dyn_rev_curr) {
+                b_dynamic_revenue += stat_rev_curr;
+              } else {
+                b_dynamic_revenue += dyn_rev_curr;
+              }
 
               document.getElementById("b_static_money").innerHTML = "Revenue with static floor: $" + b_static_revenue.toFixed(2);
               document.getElementById("b_dynamic_money").innerHTML = "Revenue with dynamic floor: $" + b_dynamic_revenue.toFixed(2);
