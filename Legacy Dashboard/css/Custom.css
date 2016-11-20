@@ -11,5 +11,24 @@
 .og-widgets-light {
   width: 33.33% !important;
   padding-top: 31px !important;
-  background-color: rgba(255,152,1,255)!important;
+  background-color: #E91E63 !important;
+}
+.green-me {
+  background-color: #00BFA5;
+  color: white;
+}
+.pink-me {
+  background-color: #C2185B;
+  color: white;
+}
+
+.floor-widgets {
+  width: 33.33% !important;
+  padding-top: 31px !important;
+}
+
+.floor-widgets-light {
+  width: 33.33% !important;
+  padding-top: 31px !important;
+  background-color: #1DE9B6 !important;
 }
