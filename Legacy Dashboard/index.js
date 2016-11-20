@@ -117,8 +117,8 @@ $(function(){
                                             fill : true
                                           }};
 
-              var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
-              plot = $.plot("#video_revenue", [revenue_plot_series], {});
+              var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], { xaxis : { ticks : []}});
+              plot = $.plot("#video_revenue", [revenue_plot_series], { xaxis : { ticks : []}});
 
               v_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
@@ -184,8 +184,8 @@ $(function(){
                                             fill : true
                                           }};
 
-              plot = $.plot("#banner_bid", [high_plot_series, dynamic_floor_plot_series, avg_plot_series], {});
-              plot = $.plot("#banner_revenue", [revenue_plot_series], {});
+              plot = $.plot("#banner_bid", [high_plot_series, dynamic_floor_plot_series, avg_plot_series], { xaxis : { ticks : []}});
+              plot = $.plot("#banner_revenue", [revenue_plot_series], { xaxis : { ticks : []}});
 
               b_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
