@@ -51,13 +51,8 @@ $(function(){
             b_optimize.init(stat_data["banner_avg_mean"], 0.2, 5);
 
             v_static_floor = stat_data.video_avg_mean;
-<<<<<<< HEAD
-            b_static_floor = stat_data.banner_avg_mean
-            countdown = setInterval(addDataPoint, 1);
-=======
             b_static_floor = stat_data.banner_avg_mean;
             countdown = setInterval(addDataPoint, 500);
->>>>>>> 77d9ab350e925049b00697ce7ecc65a926885ec5
 
             function addDataPoint() {
               // Doing stuff for video
@@ -135,8 +130,6 @@ $(function(){
                 b_data_revenue = b_data_revenue.slice(1);
               }
 
-console.log((b_dynamic_revenue - b_static_revenue) / b_static_revenue);
-
               high_plot = [];
               avg_plot = [];
               dynamic_floor_plot = [];
@@ -183,17 +176,41 @@ console.log((b_dynamic_revenue - b_static_revenue) / b_static_revenue);
     });
   }
 
-  $('#tab1').onClick(function (e) {
+  $('#tab1').click(function (e) {
+    // Toggle on
+    $('#tab1').addClass('active');
 
+    // Toggle off
+    $('#tab2').removeClass('active');
+    $('#tab3').removeClass('active');
+
+    cancelTimer();
+    init("desktop");
   });
 
-  $('#tab2').onClick(function (e) {
+  $('#tab2').click(function (e) {
+    // Toggle on
+    $('#tab2').addClass('active');
 
+    // Toggle off
+    $('#tab1').removeClass('active');
+    $('#tab3').removeClass('active');
+
+    cancelTimer();
+    init("app");
   });
 
-  $('#tab3').onClick(function (e) {
+  $('#tab3').click(function (e) {
+    // Toggle on
+    $('#tab3').addClass('active');
 
+    // Toggle off
+    $('#tab2').removeClass('active');
+    $('#tab1').removeClass('active');
+
+    cancelTimer();
+    init("mobile");
   });
 
-  init("desktop", "video");
+  init("desktop");
 });
