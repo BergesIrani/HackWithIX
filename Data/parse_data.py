@@ -21,7 +21,7 @@ with open('data.json') as data_file:
     app, desktop, mobile = sample_json, sample_json, sample_json
 
     # Variable to calculate the mean of the averages and high_bid
-    agg_avg, agg_high = 0, 0
+    banner_agg_avg, banner_agg_high, video_agg_avg, video_agg_high, banner_count, video_count = 0, 0, 0, 0, 0, 0
 
     # Iterating over the ad data
     for i in range(len(na_ad_data)):
@@ -37,11 +37,11 @@ with open('data.json') as data_file:
 
         new_object["avg_bid"] = scale * new_object["high_bid"]
 
-        agg_avg += new_object["avg_bid"]
-        agg_high += new_object["high_bid"]
-
         # Filtering the data and adding it to the appropriate list
         if obj["format"] == "video":
+            video_count += 1
+            video_agg_avg += new_object["avg_bid"]
+            video_agg_high += new_object["high_bid"]
             if obj["platform"] == "app":
                 app["video"].append(new_object)
             elif obj["platform"] == "desktop":
@@ -49,6 +49,9 @@ with open('data.json') as data_file:
             else:
                 mobile["video"].append(new_object)
         else:
+            banner_count += 1
+            banner_agg_avg += new_object["avg_bid"]
+            banner_agg_high += new_object["high_bid"]
             if obj["platform"] == "app":
                 app["banner"].append(new_object)
             elif obj["platform"] == "desktop":
@@ -64,12 +67,16 @@ with open('data.json') as data_file:
     with open('parsed.json', 'w') as outfile:
         json.dump(final_json, outfile)
 
-    agg_avg /= len(na_ad_data)
-    agg_high /= len(na_ad_data)
+    banner_agg_avg /= banner_count
+    banner_agg_high /= banner_count
+    video_agg_avg /= video_count
+    video_agg_high /= video_count
 
     mean_json = {}
-    mean_json["avg_mean"] = agg_avg
-    mean_json["high_mean"] = agg_high
+    mean_json["video_avg_mean"] = video_agg_avg
+    mean_json["video_high_mean"] = video_agg_high
+    mean_json["banner_avg_mean"] = banner_agg_avg
+    mean_json["banner_high_mean"] = banner_agg_high
 
     with open('avg_stats.json', 'w') as outfile:
         json.dump(mean_json, outfile)
