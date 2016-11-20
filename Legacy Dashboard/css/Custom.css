@@ -38,11 +38,17 @@
 }
 
 .tab-widgets {
+  transition: background-color 0.5s ease;
   width: 33.33% !important;
   padding-top: 15px !important;
   background-color: #512DA8 !important;
   color: white !important:
   font-size:22px;
+}
+
+.tab-widgets:hover {
+  background-color: #673AB7 !important;
+  cursor: pointer;
 }
 
 .content {
