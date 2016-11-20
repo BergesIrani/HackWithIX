@@ -71,9 +71,9 @@ $(function(){
                 v_dynamic_revenue += dyn_rev_curr;
               }
 
-              document.getElementById("v_static_money").innerHTML = "Revenue with static floor: $" + v_static_revenue.toFixed(2);
-              document.getElementById("v_dynamic_money").innerHTML = "Revenue with dynamic floor: $" + v_dynamic_revenue.toFixed(2);
-              document.getElementById("v_diff_text").innerHTML = "Extra money made: $" + (v_dynamic_revenue - v_static_revenue).toFixed(2)
+              document.getElementById("v_static_money").innerHTML = "$" + v_static_revenue.toFixed(2);
+              document.getElementById("v_dynamic_money").innerHTML = "$" + v_dynamic_revenue.toFixed(2);
+              document.getElementById("v_diff_text").innerHTML = "$" + (v_dynamic_revenue - v_static_revenue).toFixed(2)
               + " (" + (((v_dynamic_revenue - v_static_revenue) / v_static_revenue) * 100).toFixed(2) + "%)";
 
               v_data_high.push(high);
@@ -99,14 +99,23 @@ $(function(){
                 revenue_plot.push([i, v_data_revenue[i]]);
               }
 
-              var high_plot_series = { color : "#f00",
-                                       data  : high_plot };
-              var avg_plot_series = { color : "#0f0",
-                                       data  : avg_plot };
-              var dynamic_floor_plot_series = { color : "#00f",
+              var high_plot_series = { color : "#F44336",
+                                       data  : high_plot,
+                                       lines: {
+                                         fill : true
+                                       }};
+              var avg_plot_series = { color : "#4CAF50",
+                                       data  : avg_plot,
+                                       lines: {
+                                         fill : true
+                                       }};
+              var dynamic_floor_plot_series = { color : "#03A9F4",
                                       data  : dynamic_floor_plot };
               var revenue_plot_series = { color : "#000",
-                                          data  : revenue_plot };
+                                          data  : revenue_plot,
+                                          lines: {
+                                            fill : true
+                                          }};
 
               var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
               plot = $.plot("#video_revenue", [revenue_plot_series], {});
@@ -129,9 +138,9 @@ $(function(){
                 b_dynamic_revenue += dyn_rev_curr;
               }
 
-              document.getElementById("b_static_money").innerHTML = "Revenue with static floor: $" + b_static_revenue.toFixed(2);
-              document.getElementById("b_dynamic_money").innerHTML = "Revenue with dynamic floor: $" + b_dynamic_revenue.toFixed(2);
-              document.getElementById("b_diff_text").innerHTML = "Extra money made: $" + (b_dynamic_revenue - b_static_revenue).toFixed(2)
+              document.getElementById("b_static_money").innerHTML = "$" + b_static_revenue.toFixed(2);
+              document.getElementById("b_dynamic_money").innerHTML = "$" + b_dynamic_revenue.toFixed(2);
+              document.getElementById("b_diff_text").innerHTML = "$" + (b_dynamic_revenue - b_static_revenue).toFixed(2)
               + " (" + (((b_dynamic_revenue - b_static_revenue) / b_static_revenue) * 100).toFixed(2) + "%)";
 
               b_data_high.push(high);
@@ -157,16 +166,25 @@ $(function(){
                 revenue_plot.push([i, b_data_revenue[i]]);
               }
 
-              high_plot_series = { color : "#f00",
-                                   data  : high_plot };
-              avg_plot_series = { color : "#0f0",
-                                  data  : avg_plot };
-              dynamic_floor_plot_series = { color : "#00f",
-                                            data  : dynamic_floor_plot };
+              high_plot_series = { color : "#F44336",
+                                       data  : high_plot,
+                                       lines: {
+                                         fill : true
+                                       }};
+              avg_plot_series = { color : "#4CAF50",
+                                       data  : avg_plot,
+                                       lines: {
+                                         fill : true
+                                       }};
+              dynamic_floor_plot_series = { color : "#03A9F4",
+                                      data  : dynamic_floor_plot };
               revenue_plot_series = { color : "#000",
-                                      data  : revenue_plot };
+                                          data  : revenue_plot,
+                                          lines: {
+                                            fill : true
+                                          }};
 
-              plot = $.plot("#banner_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], {});
+              plot = $.plot("#banner_bid", [high_plot_series, dynamic_floor_plot_series, avg_plot_series], {});
               plot = $.plot("#banner_revenue", [revenue_plot_series], {});
 
               b_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
@@ -192,6 +210,22 @@ $(function(){
     });
   }
 
+  function clearData() {
+    v_static_revenue = 0;
+    v_dynamic_revenue = 0;
+    b_static_revenue = 0;
+    b_dynamic_revenue = 0;
+    v_data_high = [];
+    v_data_avg = [];
+    v_data_floor = [];
+    v_data_revenue = [];
+    b_data_high = [];
+    b_data_avg = [];
+    b_data_floor = [];
+    b_data_revenue = [];
+    clearTimeout(countdown)
+  }
+
   $('#tab1').click(function (e) {
     // Toggle on
     $('#tab1').addClass('active');
@@ -200,7 +234,7 @@ $(function(){
     $('#tab2').removeClass('active');
     $('#tab3').removeClass('active');
 
-    cancelTimer();
+    clearData();
     init("desktop");
   });
 
@@ -212,7 +246,7 @@ $(function(){
     $('#tab1').removeClass('active');
     $('#tab3').removeClass('active');
 
-    cancelTimer();
+    clearData();
     init("app");
   });
 
@@ -224,7 +258,7 @@ $(function(){
     $('#tab2').removeClass('active');
     $('#tab1').removeClass('active');
 
-    cancelTimer();
+    clearData();
     init("mobile");
   });
 

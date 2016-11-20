@@ -11,7 +11,12 @@
 .widgets {
   width: 33.33% !important;
   padding-top: 31px !important;
+  height: 130px !important;
   color: white;
+}
+
+.main-wid {
+  height: 130px !important;
 }
 
 .good {
@@ -19,7 +24,7 @@
 }
 
 .neutral {
-  background-color:  #FFD728 !important;
+  background-color:  #E91E63 !important;
 }
 
 .bad {
@@ -31,14 +36,31 @@
   padding-top: 31px !important;
   background-color: #009688 !important;
   color: white !important:
+  font-size:22px;
 }
 
 .content {
-  margin-top: 200px !important;
+  margin-top: 130px !important;
 }
 
 .active {
   border-bottom-width: 5px;
   border-bottom-style: solid;
   border-bottom-color: #FFC107;
+}
+
+.bottom-label {
+  background-color: rgba(0, 0, 0, 0.25);
+  height:50px !important;
+  padding-top:15px !important;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.large-content {
+  font-size: 28px;
+}
+
+.container-fluid-sp {
+  margin-top: 220px;
 }
