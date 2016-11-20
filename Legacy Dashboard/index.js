@@ -117,6 +117,10 @@ $(function(){
                                             fill : 1
                                           }};
               var options1 = {
+                legend: {
+                  show: true,
+                  container:$("#legend-container-vid"),
+                },
                       axisLabels: {
                           show: true
                       },
@@ -134,6 +138,10 @@ $(function(){
                   };
 
               var options2 = {
+                legend: {
+                  show: true,
+                  container:$("#legend-container-vid2"),
+                },
                       axisLabels: {
                           show: true
                       },
@@ -217,6 +225,10 @@ $(function(){
                                           }};
 
               options1 = {
+                legend: {
+                  show: true,
+                  container:$("#legend-container-banner"),
+                },
                       axisLabels: {
                           show: true
                       },
@@ -234,6 +246,10 @@ $(function(){
                   };
 
               options2 = {
+                legend: {
+                  show: true,
+                  container:$("#legend-container-banner2")
+                },
                       axisLabels: {
                           show: true
                       },
