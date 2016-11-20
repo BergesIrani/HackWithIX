@@ -1,0 +1,15 @@
+.purple-me {
+  background-color: #503690;
+  color: white;
+}
+
+.og-widgets {
+  width: 33.33% !important;
+  padding-top: 31px !important;
+}
+
+.og-widgets-light {
+  width: 33.33% !important;
+  padding-top: 31px !important;
+  background-color: rgba(255,152,1,255)!important;
+}
