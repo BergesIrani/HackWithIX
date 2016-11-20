@@ -14,7 +14,7 @@ $(function(e){
 
   var profits = [];
 
-  function testData(platform, format, startL, endL, startG, endG, stepL = 0.005, stepG = 0.1) {
+  function testData(platform, format, startL, endL, startG, endG, stepL = 0.01, stepG = 0.1) {
     for(var i = startL; i < endL; i+=stepL) {
       for(var j = startG; j < endG; j+=startG) {
         var str = "";
@@ -34,8 +34,8 @@ $(function(e){
         $.getJSON("https://raw.githubusercontent.com/rahulbdominic/HackWithIX/master/Data/avg_stats.json", function(stat_data) {
 
               optimize = OptimizeFloor();
-              optimize.init(stat_data["avg_mean"], i, j)
-              static_floor = stat_data.avg_mean;
+              optimize.init(stat_data["banner_avg_mean"], i, j)
+              static_floor = stat_data.banner_avg_mean;
               countdown = setInterval(addDataPoint, 1);
 
             function addDataPoint() {
@@ -76,6 +76,6 @@ $(function(e){
         });
     });
   }
-  testData("app", "video", 0, 0.2, 0.5, 2.5);
+  testData("app", "banner", 0, 0.2, 5.5, 6);
   alert();
 });

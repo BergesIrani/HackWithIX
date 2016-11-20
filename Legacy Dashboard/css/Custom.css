@@ -3,6 +3,11 @@
   color: white;
 }
 
+.purple-me-light {
+  background-color: #D500F9;
+  color: white;
+}
+
 .widgets {
   width: 33.33% !important;
   padding-top: 31px !important;
@@ -19,4 +24,21 @@
 
 .bad {
   background-color: #dd275b !important;
+}
+
+.tab-widgets {
+  width: 33.33% !important;
+  padding-top: 31px !important;
+  background-color: #009688 !important;
+  color: white !important:
+}
+
+.content {
+  margin-top: 200px !important;
+}
+
+.active {
+  border-bottom-width: 5px;
+  border-bottom-style: solid;
+  border-bottom-color: #FFC107
 }

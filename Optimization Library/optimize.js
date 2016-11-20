@@ -36,6 +36,9 @@ var OptimizeFloor = function(){
                      (Math.pow(LAMBDA, (GAMMA / currFloor.avg_delta))), 0);
         } else if (currFloor.avg_delta == 0) {
           newFloor = Math.max(oldFloor.floor + currFloor.delta * LAMBDA, 0);
+        } else if (currFloor.delta < 0) {
+          newFloor = Math.max(oldFloor.floor + currFloor.delta *
+                     (Math.pow(LAMBDA, (GAMMA / Math.abs(5 * currFloor.avg_delta)))), 0);
         } else {
           newFloor = Math.max(oldFloor.floor + currFloor.avg_delta *
                      (Math.pow(LAMBDA, (GAMMA / currFloor.delta))), 0);

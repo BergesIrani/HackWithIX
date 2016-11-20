@@ -44,11 +44,11 @@ $(function(){
             v_optimize = OptimizeFloor();
             b_optimize = OptimizeFloor();
             v_optimize.init(stat_data["video_avg_mean"], 0.005, 2);
-            b_optimize.init(stat_data["banner_avg_mean"], 0.005, 2);
+            b_optimize.init(stat_data["banner_avg_mean"], 0.2, 5);
 
             v_static_floor = stat_data.video_avg_mean;
             b_static_floor = stat_data.banner_avg_mean
-            countdown = setInterval(addDataPoint, 500);
+            countdown = setInterval(addDataPoint, 1);
 
             function addDataPoint() {
               // Doing stuff for video
@@ -143,6 +143,18 @@ $(function(){
         });
     });
   }
+
+  $('#tab1').onClick(function (e) {
+    
+  });
+
+  $('#tab2').onClick(function (e) {
+
+  });
+
+  $('#tab3').onClick(function (e) {
+
+  });
 
   init("app", "video");
 });
