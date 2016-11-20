@@ -99,22 +99,22 @@ $(function(){
                 revenue_plot.push([i, v_data_revenue[i]]);
               }
 
-              var high_plot_series = { color : "#F44336",
+              var high_plot_series = { color : "#FF5252",
                                        data  : high_plot,
                                        lines: {
-                                         fill : true
+                                         fill : 1
                                        }};
-              var avg_plot_series = { color : "#4CAF50",
+              var avg_plot_series = { color : "#FFC107",
                                        data  : avg_plot,
                                        lines: {
-                                         fill : true
+                                         fill : 1
                                        }};
               var dynamic_floor_plot_series = { color : "#03A9F4",
                                       data  : dynamic_floor_plot };
-              var revenue_plot_series = { color : "#000",
+              var revenue_plot_series = { color : "#009688",
                                           data  : revenue_plot,
                                           lines: {
-                                            fill : true
+                                            fill : 1
                                           }};
 
               var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], { xaxis : { ticks : []}});
@@ -166,25 +166,26 @@ $(function(){
                 revenue_plot.push([i, b_data_revenue[i]]);
               }
 
-              high_plot_series = { color : "#F44336",
+              high_plot_series = { color : "#FF5252",
                                        data  : high_plot,
                                        lines: {
-                                         fill : true
+                                         fill : 1
                                        }};
-              avg_plot_series = { color : "#4CAF50",
+              avg_plot_series = { color : "#FFC107",
                                        data  : avg_plot,
                                        lines: {
-                                         fill : true
+                                         fill : 1
                                        }};
               dynamic_floor_plot_series = { color : "#03A9F4",
                                       data  : dynamic_floor_plot };
-              revenue_plot_series = { color : "#000",
+              revenue_plot_series = { color : "#009688",
                                           data  : revenue_plot,
                                           lines: {
-                                            fill : true
+                                            fill : 1
                                           }};
 
-              plot = $.plot("#banner_bid", [high_plot_series, dynamic_floor_plot_series, avg_plot_series], { xaxis : { ticks : []}});
+
+              plot = $.plot("#banner_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], { xaxis : { ticks : []}});
               plot = $.plot("#banner_revenue", [revenue_plot_series], { xaxis : { ticks : []}});
 
               b_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
