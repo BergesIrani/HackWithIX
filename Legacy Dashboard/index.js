@@ -116,9 +116,41 @@ $(function(){
                                           lines: {
                                             fill : 1
                                           }};
+              var options1 = {
+                      axisLabels: {
+                          show: true
+                      },
+                      xaxes: [{
+                        ticks : [],
+                        axisLabel: 'Auctions',
+                      }],
+                      yaxes: [{
+                          position: 'left',
+                          axisLabel: 'Bid Price',
+                      }, {
+                          position: 'right',
+                          axisLabel: 'bleem'
+                      }]
+                  };
 
-              var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], { xaxis : { ticks : []}});
-              plot = $.plot("#video_revenue", [revenue_plot_series], { xaxis : { ticks : []}});
+              var options2 = {
+                      axisLabels: {
+                          show: true
+                      },
+                      xaxes: [{
+                        ticks : [],
+                        axisLabel: 'Auctions',
+                      }],
+                      yaxes: [{
+                          position: 'left',
+                          axisLabel: 'Bid Price',
+                      }, {
+                          position: 'right',
+                          axisLabel: 'bleem'
+                      }]
+                  };
+              var plot = $.plot("#video_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], options1);
+              plot = $.plot("#video_revenue", [revenue_plot_series], options2);
 
               v_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
@@ -184,9 +216,42 @@ $(function(){
                                             fill : 1
                                           }};
 
+              options1 = {
+                      axisLabels: {
+                          show: true
+                      },
+                      xaxes: [{
+                        ticks : [],
+                        axisLabel: 'Auctions',
+                      }],
+                      yaxes: [{
+                          position: 'left',
+                          axisLabel: 'Bid Price',
+                      }, {
+                          position: 'right',
+                          axisLabel: 'bleem'
+                      }]
+                  };
 
-              plot = $.plot("#banner_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], { xaxis : { ticks : []}});
-              plot = $.plot("#banner_revenue", [revenue_plot_series], { xaxis : { ticks : []}});
+              options2 = {
+                      axisLabels: {
+                          show: true
+                      },
+                      xaxes: [{
+                        ticks : [],
+                        axisLabel: 'Auctions',
+                      }],
+                      yaxes: [{
+                          position: 'left',
+                          axisLabel: 'Bid Price',
+                      }, {
+                          position: 'right',
+                          axisLabel: 'bleem'
+                      }]
+                  };
+
+              plot = $.plot("#banner_bid", [high_plot_series, avg_plot_series, dynamic_floor_plot_series], options1);
+              plot = $.plot("#banner_revenue", [revenue_plot_series], options2);
 
               b_optimize.updateState(curr_data_point.high_bid, curr_data_point.avg_bid);
 
