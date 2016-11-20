@@ -51,8 +51,13 @@ $(function(){
             b_optimize.init(stat_data["banner_avg_mean"], 0.2, 5);
 
             v_static_floor = stat_data.video_avg_mean;
+<<<<<<< HEAD
+            b_static_floor = stat_data.banner_avg_mean
+            countdown = setInterval(addDataPoint, 1);
+=======
             b_static_floor = stat_data.banner_avg_mean;
             countdown = setInterval(addDataPoint, 500);
+>>>>>>> 77d9ab350e925049b00697ce7ecc65a926885ec5
 
             function addDataPoint() {
               // Doing stuff for video
@@ -177,6 +182,18 @@ console.log((b_dynamic_revenue - b_static_revenue) / b_static_revenue);
         });
     });
   }
+
+  $('#tab1').onClick(function (e) {
+
+  });
+
+  $('#tab2').onClick(function (e) {
+
+  });
+
+  $('#tab3').onClick(function (e) {
+
+  });
 
   init("desktop", "video");
 });
